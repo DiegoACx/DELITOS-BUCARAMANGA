@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Entornos virtuales
+.venv/
+venv/
+
+# Datos descargados (se regeneran con src/download_data.py)
+data/
+*.csv
+
+# Jupyter
+.ipynb_checkpoints/

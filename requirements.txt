@@ -1,0 +1,8 @@
+# Versiones exactas del entorno con el que se validaron los resultados
+# (scikit-learn, pandas y numpy son las del entorno de evaluacion).
+scikit-learn==1.9.1
+pandas==3.0.6
+numpy==2.5.3
+joblib==1.6.0
+streamlit==1.64.0
+matplotlib==3.11.2
