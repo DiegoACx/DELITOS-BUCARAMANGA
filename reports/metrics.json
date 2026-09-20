@@ -1,0 +1,231 @@
+{
+  "data": {
+    "file": "data/delitos_bucaramanga.csv",
+    "sha256": "74aacd380a3c66ddd02d9df7e3754dca772f43496265ba456f1440d588e2d424",
+    "rows_downloaded": 88627,
+    "rows_clean": 76385,
+    "cleaning_steps": [
+      {
+        "step": "filas descargadas",
+        "rows": 88627
+      },
+      {
+        "step": "tras quitar duplicados",
+        "rows": 88617
+      },
+      {
+        "step": "armas con >=100 casos",
+        "rows": 88588
+      },
+      {
+        "step": "sin arma NO REPORTADO",
+        "rows": 88324
+      },
+      {
+        "step": "sin corregimientos",
+        "rows": 87398
+      },
+      {
+        "step": "sin barrios fuera de Bucaramanga",
+        "rows": 84848
+      },
+      {
+        "step": "movil_agresor valido",
+        "rows": 84846
+      },
+      {
+        "step": "movil_victima valido",
+        "rows": 84835
+      },
+      {
+        "step": "sexo distinto de NO DISPONIBLE",
+        "rows": 76485
+      },
+      {
+        "step": "edad valida (sin NA, NO DISPONIBLE, 125)",
+        "rows": 76385
+      },
+      {
+        "step": "sin tipologia nula (0 nulas)",
+        "rows": 76385
+      }
+    ]
+  },
+  "split": {
+    "type": "temporal",
+    "train_years": "2016-2021",
+    "test_year": 2022,
+    "train_rows": 62483,
+    "test_rows": 13902
+  },
+  "features": {
+    "categorical": [
+      "num_comuna",
+      "mes_num",
+      "sexo",
+      "movil_victima",
+      "dia_nombre",
+      "rango_edad",
+      "rango_horario",
+      "curso_vida"
+    ],
+    "clase_sitio": "19 categorias mas frecuentes + 'infrecuente' (aprendido solo con train)"
+  },
+  "class_distribution": {
+    "train": {
+      "DELITOS CONTRA EL PATRIMONIO ECONOMICO": {
+        "n": 35270,
+        "pct": 56.45
+      },
+      "DELITOS CONTRA LA VIDA Y LA INTEGRIDAD PERSONAL": {
+        "n": 12777,
+        "pct": 20.45
+      },
+      "DELITOS CONTRA LA FAMILIA": {
+        "n": 10433,
+        "pct": 16.7
+      },
+      "DELITOS CONTRA LA LIBERTAD, INTEGRIDAD Y FORMACION SEXUALES": {
+        "n": 2626,
+        "pct": 4.2
+      },
+      "DELITOS CONTRA LA SEGURIDAD PUBLICA": {
+        "n": 1377,
+        "pct": 2.2
+      }
+    },
+    "test": {
+      "DELITOS CONTRA EL PATRIMONIO ECONOMICO": {
+        "n": 7826,
+        "pct": 56.29
+      },
+      "DELITOS CONTRA LA VIDA Y LA INTEGRIDAD PERSONAL": {
+        "n": 2501,
+        "pct": 17.99
+      },
+      "DELITOS CONTRA LA SEGURIDAD PUBLICA": {
+        "n": 1694,
+        "pct": 12.19
+      },
+      "DELITOS CONTRA LA FAMILIA": {
+        "n": 1498,
+        "pct": 10.78
+      },
+      "DELITOS CONTRA LA LIBERTAD, INTEGRIDAD Y FORMACION SEXUALES": {
+        "n": 383,
+        "pct": 2.75
+      }
+    }
+  },
+  "models": {
+    "Dummy(prior)": {
+      "accuracy": 0.5629,
+      "macro_f1": 0.1441,
+      "log_loss": 1.3525,
+      "per_class": {
+        "DELITOS CONTRA EL PATRIMONIO ECONOMICO": {
+          "precision": 0.5629,
+          "recall": 1.0,
+          "support": 7826
+        },
+        "DELITOS CONTRA LA FAMILIA": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "support": 1498
+        },
+        "DELITOS CONTRA LA LIBERTAD, INTEGRIDAD Y FORMACION SEXUALES": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "support": 383
+        },
+        "DELITOS CONTRA LA SEGURIDAD PUBLICA": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "support": 1694
+        },
+        "DELITOS CONTRA LA VIDA Y LA INTEGRIDAD PERSONAL": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "support": 2501
+        }
+      }
+    },
+    "LogisticRegression": {
+      "accuracy": 0.6142,
+      "macro_f1": 0.4092,
+      "log_loss": 1.0727,
+      "per_class": {
+        "DELITOS CONTRA EL PATRIMONIO ECONOMICO": {
+          "precision": 0.6573,
+          "recall": 0.9145,
+          "support": 7826
+        },
+        "DELITOS CONTRA LA FAMILIA": {
+          "precision": 0.5217,
+          "recall": 0.3939,
+          "support": 1498
+        },
+        "DELITOS CONTRA LA LIBERTAD, INTEGRIDAD Y FORMACION SEXUALES": {
+          "precision": 0.5164,
+          "recall": 0.5744,
+          "support": 383
+        },
+        "DELITOS CONTRA LA SEGURIDAD PUBLICA": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "support": 1694
+        },
+        "DELITOS CONTRA LA VIDA Y LA INTEGRIDAD PERSONAL": {
+          "precision": 0.3919,
+          "recall": 0.2283,
+          "support": 2501
+        }
+      }
+    },
+    "HistGradientBoosting": {
+      "accuracy": 0.6181,
+      "macro_f1": 0.4182,
+      "log_loss": 1.0705,
+      "per_class": {
+        "DELITOS CONTRA EL PATRIMONIO ECONOMICO": {
+          "precision": 0.6716,
+          "recall": 0.9042,
+          "support": 7826
+        },
+        "DELITOS CONTRA LA FAMILIA": {
+          "precision": 0.5095,
+          "recall": 0.4479,
+          "support": 1498
+        },
+        "DELITOS CONTRA LA LIBERTAD, INTEGRIDAD Y FORMACION SEXUALES": {
+          "precision": 0.5182,
+          "recall": 0.5561,
+          "support": 383
+        },
+        "DELITOS CONTRA LA SEGURIDAD PUBLICA": {
+          "precision": 0.1429,
+          "recall": 0.0006,
+          "support": 1694
+        },
+        "DELITOS CONTRA LA VIDA Y LA INTEGRIDAD PERSONAL": {
+          "precision": 0.3875,
+          "recall": 0.2527,
+          "support": 2501
+        }
+      }
+    }
+  },
+  "saved_model": {
+    "name": "HistGradientBoosting",
+    "path": "models/pipeline.joblib",
+    "trained_on": "2016-2021"
+  },
+  "hyperparameters": "defaults de scikit-learn, sin ajustar; random_state=0",
+  "versions": {
+    "python": "3.13.3",
+    "scikit-learn": "1.9.1",
+    "pandas": "3.0.6",
+    "numpy": "2.5.3",
+    "joblib": "1.6.0"
+  }
+}
