@@ -32,6 +32,10 @@ BARRIOS_FUERA = ['NO DISPONIBLE', 'VILLAS DE SAN IGNACIO (SECTORES BAVARIA I Y I
                  'CAMPO ALEGRE II', 'MARIA AUXILIADORA', 'CARRASCO', 'EL UVO', 'GRANJAS REAGAN', 'URB. SAN FERMIN',
                  'VILLA FLOR', 'VILLA REAL DEL SUR', 'VILLA SARA', 'LA GUACAMAYA', 'PRADOS DEL NORTE']
 
+# Regla de rango_edad (pd.cut con right=True, include_lowest=True); la app la reutiliza.
+EDAD_BINS = [0, 5, 12, 18, 25, 59, float('inf')]
+EDAD_LABELS = ['PRIMERA INFANCIA', 'INFANCIA', 'ADOLESCENCIA', 'JUVENTUD', 'ADULTEZ', 'PERSONA MAYOR']
+
 MOVIL = {"CONDUCTOR MOTOCICLETA": "MOTOCICLETA", "PASAJERO MOTOCICLETA": "MOTOCICLETA", "PASAJERO BUS": "BUS",
          "CONDUCTOR VEHICULO": "VEHICULO", "CONDUCTOR TAXI": "TAXI", "PASAJERO TAXI": "TAXI",
          "PASAJERO VEHICULO": "VEHICULO", "PASAJERO METRO": "METRO", "CONDUCTOR BUS": "BUS"}
@@ -82,8 +86,7 @@ def limpiar(csv_path):
     dfc = dfc[~dfc['edad'].astype(str).isin(['NO DISPONIBLE', '125'])]
     steps.append(("edad valida (sin NA, NO DISPONIBLE, 125)", len(dfc)))
     dfc['edad'] = pd.to_numeric(dfc['edad'], errors='coerce')
-    dfc['rango_edad'] = pd.cut(dfc['edad'], bins=[0, 5, 12, 18, 25, 59, float('inf')],
-                               labels=['PRIMERA INFANCIA', 'INFANCIA', 'ADOLESCENCIA', 'JUVENTUD', 'ADULTEZ', 'PERSONA MAYOR'],
+    dfc['rango_edad'] = pd.cut(dfc['edad'], bins=EDAD_BINS, labels=EDAD_LABELS,
                                right=True, include_lowest=True)
     n_tip_null = int(dfc['tipologia'].isna().sum())
     dfc = dfc[dfc['tipologia'].notna()]
